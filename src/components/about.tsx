@@ -38,7 +38,7 @@ export const AboutSection = () => {
       className="md:px-[7vw] lg:px-[10vw] mt-10 z-20 max-w-[100rem] mx-auto items-center justify-center flex"
     >
       <div className="w-full px-7 py-5 md:p-10">
-        <h2 className="text-4xl font-bold mb-6 text-secondary">About Me</h2>
+        <h2 className="text-4xl font-bold mb-6 text-gray-700">About Me</h2>
 
         {/* INI BAGIAN YANG DIUBAH */}
         <div className="flex justify-start items-start gap-10 flex-col md:flex-row">

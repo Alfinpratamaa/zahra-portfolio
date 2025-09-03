@@ -106,7 +106,7 @@ export function Navbar() {
         )}
       >
         <div className="flex justify-between items-center p-4 border-b">
-          <h1 className="text-2xl font-bold text-black">Z</h1>
+          <span className="text-2xl font-bold text-black">Z</span>
           <button
             aria-label="Close menu"
             onClick={toggleMenu}
