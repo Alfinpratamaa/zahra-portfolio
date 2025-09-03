@@ -93,6 +93,7 @@ export function Navbar() {
         <button
           className="md:hidden text-2xl text-gray-900 focus:outline-none"
           onClick={toggleMenu}
+          aria-label="Toggle menu"
         >
           {!isOpen && <CgMenuLeftAlt />}
         </button>
