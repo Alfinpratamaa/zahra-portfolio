@@ -19,7 +19,7 @@ export function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
 
-      const sections = document.querySelectorAll("section[id]");
+      const sections = document.querySelectorAll("section[id], div[id]");
       let current: string = "";
 
       sections.forEach((section) => {

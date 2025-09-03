@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <>
       <BgCustom className="h-120" />
-      <section
+      <div
         id="home"
         className="relative flex flex-col lg:flex-row items-center justify-between overflow-hidden p-20 gap-10 px-4 sm:px-6 md:px-[7vw] lg:px-[10vw] max-w-[100rem] mx-auto "
       >
@@ -41,7 +41,7 @@ export default function Hero() {
             DOWNLOAD CV
           </Link>
         </div>
-      </section>
+      </div>
     </>
   );
 }
