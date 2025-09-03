@@ -55,46 +55,58 @@ export const AboutSection = () => {
               <Link
                 target="_blank"
                 href="https://www.linkedin.com/in/zahramaulidak"
+                aria-label="Visit my LinkedIn profile (opens in a new tab)"
               >
                 <FiLinkedin />
               </Link>
-              <Link target="_blank" href="https://wa.me/6282113905090">
+              <Link
+                target="_blank"
+                href="https://wa.me/6282113905090"
+                aria-label="Contact me on WhatsApp (opens in a new tab)"
+              >
                 <FaWhatsapp />
               </Link>
               <Link
                 target="_blank"
                 href="https://www.instagram.com/zhrmaulidaaa"
+                aria-label="Follow me on Instagram (opens in a new tab)"
               >
                 <FaInstagram />
               </Link>
             </div>
           </div>
           <div className="flex flex-col max-w-md">
-            <h3 className="font-bold text-gray-400 text-2xl my-3">
+            {/* From text-gray-400 to a darker text-gray-700 */}
+            <h3 className="font-bold text-gray-700 text-2xl my-3">
               Zahra Maulida Kurnia
             </h3>
+
             <div className="flex items-center gap-2 mb-2">
               <div className="w-6 h-6 flex items-center justify-center bg-primary rounded-lg">
                 <FaLocationDot className="text-thirdy text-sm" />
               </div>
-              <p className="text-xs font-semibold text-secondary">
+              {/* From text-secondary to a darker, compliant color like text-slate-800 */}
+              <p className="text-xs font-semibold text-slate-800">
                 Bekasi City, West Java, Indonesia
               </p>
             </div>
+
             <div className="flex items-center gap-2 mb-6">
               <div className="w-6 h-6 flex items-center justify-center bg-primary rounded-lg">
                 <MdEmail className="text-thirdy text-sm" />
               </div>
+              {/* Also changed text-secondary here */}
               <Link
                 href="mailto:zahramaulida254@gmail.com"
-                className="text-sm text-secondary font-semibold"
+                className="text-sm text-slate-800 font-semibold"
               >
                 zahramaulida254@gmail.com
               </Link>
             </div>
+
             <div className="mb-6">
-              <h4 className="font-semibold text-gray-400 mb-1">My Education</h4>
-              {/* Gunakan Flexbox, bukan float */}
+              {/* From text-gray-400 to text-gray-700 */}
+              <h4 className="font-semibold text-gray-700 mb-1">My Education</h4>
               <div className="flex justify-between text-xs leading-tight">
                 <p>
                   Majoring in Mathematics,
@@ -105,11 +117,12 @@ export const AboutSection = () => {
                 </p>
               </div>
             </div>
+
             <div className="mb-6">
-              <h4 className="font-semibold text-gray-400 mb-2">
+              {/* From text-gray-400 to text-gray-700 */}
+              <h4 className="font-semibold text-gray-700 mb-2">
                 Related Skills
               </h4>
-              {/* Gunakan .map() untuk merender skills */}
               <div className="flex flex-wrap gap-3">
                 {skills.map((skill, index) => (
                   <div

@@ -106,8 +106,12 @@ export function Navbar() {
         )}
       >
         <div className="flex justify-between items-center p-4 border-b">
-          <span className="text-2xl font-bold text-black">Z</span>
-          <button onClick={toggleMenu} className="text-2xl text-gray-900">
+          <h1 className="text-2xl font-bold text-black">Z</h1>
+          <button
+            aria-label="Close menu"
+            onClick={toggleMenu}
+            className="text-2xl cursor-pointer text-gray-900"
+          >
             <RiCloseFill />
           </button>
         </div>
