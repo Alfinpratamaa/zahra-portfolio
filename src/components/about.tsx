@@ -5,6 +5,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FiLinkedin } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import { getAllSkills, type Skill } from "@/action/skill";
+import { getSettings } from "@/action/cv";
 
 const categoryLabels: Record<string, string> = {
   programming: "Programming",
@@ -14,7 +15,8 @@ const categoryLabels: Record<string, string> = {
 };
 
 export const AboutSection = async () => {
-  const skills = await getAllSkills();
+  const [skills, settings] = await Promise.all([getAllSkills(), getSettings()]);
+  const heroImage = settings.heroImageUrl || "/og-image.png";
 
   const groupedSkills = skills.reduce<Record<string, Skill[]>>((acc, skill) => {
     const cat = skill.category || "other";
@@ -35,7 +37,7 @@ export const AboutSection = async () => {
           <div className="flex flex-col items-center">
             <Image
               priority
-              src={"/og-image.png"}
+              src={heroImage}
               alt="Zahra Maulida Kurnia"
               width={400}
               height={400}
