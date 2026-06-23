@@ -42,3 +42,5 @@ Requires env vars: `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`
 - Sanity client uses CDN by default (`useCdn: true`); set to `false` for ISR/tag-based revalidation
 - Server actions in `src/action/` use `"use server"` directive
 - Sanity Studio is client-side (`'use client'` in `sanity.config.ts`)
+
+  ---
