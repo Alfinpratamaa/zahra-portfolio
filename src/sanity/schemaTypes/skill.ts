@@ -1,5 +1,10 @@
 import { defineField, defineType } from "sanity";
 
+/**
+ * Sanity document type for storing a skill.
+ * Each skill has a name, icon image, and category.
+ * Used in the About section to display a grouped skill list.
+ */
 export const skill = defineType({
   name: "skill",
   title: "Skill",
