@@ -1,10 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
-import { getCvUrl } from "@/action/cv";
+import { getSettings } from "@/action/cv";
 import { BgCustom } from "@/components/bg-custom";
 
+const DEFAULT_DESCRIPTION =
+  "A data scientist based on Bekasi, Indonesia. Have a great passion in data analysis, data visualization, and machine learning. Passionate about turning data into actionable insights and driving business growth through data-driven decision making.";
+
 export default async function Hero() {
-  const cvUrl = await getCvUrl();
-  const cvHref = cvUrl || "/cv_zahra.pdf";
+  const settings = await getSettings();
+  const cvHref = settings.cvUrl || "/cv_zahra.pdf";
+  const description = settings.heroDescription || DEFAULT_DESCRIPTION;
 
   return (
     <>
@@ -30,18 +35,27 @@ export default async function Hero() {
           </Link>
         </div>
 
+        {/* Hero Image */}
+        {settings.heroImageUrl && (
+          <div className="relative z-10 order-2 lg:order-2 flex justify-center">
+            <Image
+              src={settings.heroImageUrl}
+              alt="Zahra Maulida Kurnia"
+              width={300}
+              height={300}
+              className="rounded-full object-cover"
+              priority
+            />
+          </div>
+        )}
+
         {/* Bagian Deskripsi */}
-        <div className="flex-1 max-w-md text-gray-600 relative z-10 px-4 sm:px-6 lg:mr-32 lg:border-l border-secondary lg:pl-10 text-center lg:text-left order-2">
-          <p className="text-sm sm:text-base">
-            A data scientist based on Bekasi, Indonesia. Have a great passion in
-            data analysis, data visualization, and machine learning. Passionate
-            about turning data into actionable insights and driving business
-            growth through data-driven decision making.
-          </p>
+        <div className="flex-1 max-w-md text-gray-600 relative z-10 px-4 sm:px-6 lg:mr-32 lg:border-l border-secondary lg:pl-10 text-center lg:text-left order-3">
+          <p className="text-sm sm:text-base">{description}</p>
         </div>
 
         {/* Button khusus mobile */}
-        <div className="block lg:hidden order-3 relative z-10">
+        <div className="block lg:hidden order-4 relative z-10">
           <Link
             href={cvHref}
             target="_blank"

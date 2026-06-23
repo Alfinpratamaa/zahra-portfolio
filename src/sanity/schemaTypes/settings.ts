@@ -1,5 +1,9 @@
 import { defineField, defineType } from "sanity";
 
+/**
+ * Singleton document for site-wide settings.
+ * Managed via Studio with documentId "settings".
+ */
 export const settings = defineType({
   name: "settings",
   title: "Settings",
@@ -14,6 +18,20 @@ export const settings = defineType({
         accept: ".pdf",
       },
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "heroImage",
+      title: "Hero Image",
+      description: "Profile photo displayed in the hero section",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "heroDescription",
+      title: "Hero Description",
+      description: "Short description text in the hero section",
+      type: "text",
+      rows: 3,
     }),
   ],
   preview: {
