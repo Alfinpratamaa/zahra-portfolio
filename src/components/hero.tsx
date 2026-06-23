@@ -1,7 +1,11 @@
-import { BgCustom } from "@/components/bg-custom";
 import Link from "next/link";
+import { getCvUrl } from "@/action/cv";
+import { BgCustom } from "@/components/bg-custom";
 
-export default function Hero() {
+export default async function Hero() {
+  const cvUrl = await getCvUrl();
+  const cvHref = cvUrl || "/cv_zahra.pdf";
+
   return (
     <>
       <BgCustom className="h-120" />
@@ -17,9 +21,13 @@ export default function Hero() {
           </h1>
 
           {/* Button khusus desktop */}
-          <button className="hidden lg:inline-block mt-8 lg:mt-12 px-6 sm:px-8 lg:px-10 cursor-pointer py-3 sm:py-4 lg:py-5 rounded-2xl bg-primary text-black font-semibold shadow hover:bg-pink-200 transition">
+          <Link
+            href={cvHref}
+            target="_blank"
+            className="hidden lg:inline-block mt-8 lg:mt-12 px-6 sm:px-8 lg:px-10 cursor-pointer py-3 sm:py-4 lg:py-5 rounded-2xl bg-primary text-black font-semibold shadow hover:bg-pink-200 transition"
+          >
             DOWNLOAD CV
-          </button>
+          </Link>
         </div>
 
         {/* Bagian Deskripsi */}
@@ -35,7 +43,8 @@ export default function Hero() {
         {/* Button khusus mobile */}
         <div className="block lg:hidden order-3 relative z-10">
           <Link
-            href="/cv_zahra.pdf"
+            href={cvHref}
+            target="_blank"
             className="mt-8 px-6 sm:px-8 cursor-pointer py-3 sm:py-4 rounded-2xl bg-primary text-black font-semibold shadow hover:bg-pink-200 transition"
           >
             DOWNLOAD CV

@@ -1,37 +1,28 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaInstagram, FaVoicemail, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 import { FiLinkedin } from "react-icons/fi";
-import { FaLocationDot, FaLocationPin } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
+import { getAllSkills, type Skill } from "@/action/skill";
 
-const skills = [
-  { name: "Python", icon: "/python.png" },
-  { name: "Pandas", icon: "/pandas.png" },
-  { name: "Numpy", icon: "/numpy.png" },
-  { name: "Rapid Miner", icon: "/rapid-miner.png" },
-  { name: "Mysql", icon: "/mysql.png" },
-];
+const categoryLabels: Record<string, string> = {
+  programming: "Programming",
+  tool: "Tools",
+  database: "Databases",
+  other: "Other",
+};
 
-const workExperiences = [
-  {
-    title: "Secretary",
-    organization: "Himpunan Mahasiswa Departemen Matematika",
-    period: "2023 - 2024",
-    description:
-      "Responsible for administrative tasks and documentation of organizational activities",
-  },
-  {
-    title: "Member",
-    organization: "Himpunan Mahasiswa Departemen Matematika",
-    period: "2022 - 2023",
-    description:
-      "Active participant in departmental events and academic activities",
-  },
-];
+export const AboutSection = async () => {
+  const skills = await getAllSkills();
 
-export const AboutSection = () => {
+  const groupedSkills = skills.reduce<Record<string, Skill[]>>((acc, skill) => {
+    const cat = skill.category || "other";
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(skill);
+    return acc;
+  }, {});
+
   return (
     <section
       id="about"
@@ -40,7 +31,6 @@ export const AboutSection = () => {
       <div className="w-full px-7 py-5 md:p-10">
         <h2 className="text-4xl font-bold mb-6 text-gray-700">About Me</h2>
 
-        {/* INI BAGIAN YANG DIUBAH */}
         <div className="flex justify-start items-start gap-10 flex-col md:flex-row">
           <div className="flex flex-col items-center">
             <Image
@@ -76,7 +66,6 @@ export const AboutSection = () => {
             </div>
           </div>
           <div className="flex flex-col max-w-md">
-            {/* From text-gray-400 to a darker text-gray-700 */}
             <h3 className="font-bold text-gray-700 text-2xl my-3">
               Zahra Maulida Kurnia
             </h3>
@@ -85,7 +74,6 @@ export const AboutSection = () => {
               <div className="w-6 h-6 flex items-center justify-center bg-primary rounded-lg">
                 <FaLocationDot className="text-thirdy text-sm" />
               </div>
-              {/* From text-secondary to a darker, compliant color like text-slate-800 */}
               <p className="text-xs font-semibold text-slate-800">
                 Bekasi City, West Java, Indonesia
               </p>
@@ -95,7 +83,6 @@ export const AboutSection = () => {
               <div className="w-6 h-6 flex items-center justify-center bg-primary rounded-lg">
                 <MdEmail className="text-thirdy text-sm" />
               </div>
-              {/* Also changed text-secondary here */}
               <Link
                 href="mailto:zahramaulida254@gmail.com"
                 className="text-sm text-slate-800 font-semibold"
@@ -105,7 +92,6 @@ export const AboutSection = () => {
             </div>
 
             <div className="mb-6">
-              {/* From text-gray-400 to text-gray-700 */}
               <h4 className="font-semibold text-gray-700 mb-1">My Education</h4>
               <div className="flex justify-between text-xs leading-tight">
                 <p>
@@ -119,64 +105,41 @@ export const AboutSection = () => {
             </div>
 
             <div className="mb-6">
-              {/* From text-gray-400 to text-gray-700 */}
               <h4 className="font-semibold text-gray-700 mb-2">
                 Related Skills
               </h4>
-              <div className="flex flex-wrap gap-3">
-                {skills.map((skill, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center justify-center bg-primary rounded-lg p-3 text-xs text-pink-700 w-20 h-20"
-                  >
-                    <div className="w-8 h-8 flex items-center justify-center mb-1">
-                      <Image
-                        draggable={false}
-                        alt={`${skill.name} logo icon`}
-                        className="max-w-full max-h-full object-contain"
-                        height={32}
-                        src={skill.icon}
-                        width={32}
-                      />
-                    </div>
-                    <span className="text-center leading-tight">
-                      {skill.name}
-                    </span>
+              {Object.entries(groupedSkills).map(([category, items]) => (
+                <div key={category} className="mb-4">
+                  <p className="text-xs font-medium text-gray-500 mb-2 uppercase tracking-wide">
+                    {categoryLabels[category] || category}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {items.map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="flex flex-col items-center justify-center bg-primary rounded-lg p-3 text-xs text-pink-700 w-20 h-20"
+                      >
+                        <div className="w-8 h-8 flex items-center justify-center mb-1">
+                          <Image
+                            draggable={false}
+                            alt={`${skill.name} logo icon`}
+                            className="max-w-full max-h-full object-contain"
+                            height={32}
+                            src={skill.icon}
+                            width={32}
+                          />
+                        </div>
+                        <span className="text-center leading-tight">
+                          {skill.name}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-
-        {/* Work/Organization Experience Section */}
-        {/* <div className="mt-12">
-          <h3 className="text-2xl font-bold mb-6 text-secondary">
-            Work & Organization Experience
-          </h3>
-          <div className="space-y-6">
-            {workExperiences.map((experience, index) => (
-              <div key={index} className="border-l-4 border-primary pl-6 pb-6">
-                <div className="flex flex-col md:flex-row md:justify-between md:items-start">
-                  <div>
-                    <h4 className="font-bold text-lg text-secondary">
-                      {experience.title}
-                    </h4>
-                    <p className="text-gray-400 font-semibold">
-                      {experience.organization}
-                    </p>
-                    <p className="text-sm text-gray-500 mt-2">
-                      {experience.description}
-                    </p>
-                  </div>
-                  <span className="text-sm text-gray-500 md:text-right mt-2 md:mt-0 whitespace-nowrap">
-                    {experience.period}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div> */}
       </div>
     </section>
   );
