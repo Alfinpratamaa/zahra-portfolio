@@ -20,9 +20,7 @@ export async function getAllProjects() {
     const projects = await client.fetch(
       query,
       {},
-      {
-        cache: "no-store",
-      }
+      { next: { revalidate: 60 } }
     );
     return projects;
   } catch (error) {

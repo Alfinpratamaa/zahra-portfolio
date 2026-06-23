@@ -18,7 +18,7 @@ export async function getAllSkills(): Promise<Skill[]> {
   `;
 
   try {
-    const skills = await client.fetch(query, {}, { cache: "no-store" });
+    const skills = await client.fetch(query, {}, { next: { revalidate: 60 } });
     return skills;
   } catch (error) {
     console.error("Failed to fetch skills:", error);

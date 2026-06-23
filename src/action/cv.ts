@@ -10,7 +10,7 @@ export async function getCvUrl(): Promise<string | null> {
   `;
 
   try {
-    const result = await client.fetch(query, {}, { cache: "no-store" });
+    const result = await client.fetch(query, {}, { next: { revalidate: 60 } });
     return result?.cvUrl ?? null;
   } catch (error) {
     console.error("Failed to fetch CV URL:", error);
